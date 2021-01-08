@@ -10,12 +10,24 @@ public class Node {
     return next;
   }
 
+  public void setNext(Node n) {
+    next = n;
+  }
+
   public String getData() {
     return data;
   }
 
+  public void setData(String s) {
+    data = s;
+  }
+
   public Node getPrev() {
     return prev;
+  }
+
+  public void setPrev(Node n) {
+    prev = n;
   }
 
 }

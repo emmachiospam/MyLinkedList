@@ -30,30 +30,42 @@ public class MyLinkedList {
   }
 
   public void add(int index, String value) {
-    Node current = start;
     Node added = new Node(value);
     if(index < 0 || index > size) {
       throw new IndexOutOfBoundsException("index cannot be " + index);
     }
     else{
-      for(int i = 0; i < index-1; i++) {
-        current = current.getNext();
+      if(index == 0) {
+        start.setPrev(added);
+        Node oldStart = start;
+        start = added;
+        start.setNext(oldStart);
+        size++;
       }
-      current.setNext(added);
-      added.setPrev(current);
-      current = end;
-      for(int i = size - 1; i > index+1; i--) {
-        current = end.getPrev();
+      else if(index == size) {
+        add(value);
       }
-      current.setPrev(added);
-      added.setNext(current);
-      size++;
+      else {
+        Node current = start;
+        for(int i = 0; i < index-1; i++) {
+          current = current.getNext();
+        }
+        current.setNext(added);
+        added.setPrev(current);
+        current = end;
+        for(int i = size - 1; i > index+1; i--) {
+          current = end.getPrev();
+        }
+        current.setPrev(added);
+        added.setNext(current);
+        size++;
+      }
     }
   }
 
   public String get(int index) {
     Node current = start;
-    if(index < 0 || index > size) {
+    if(index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("index cannot be " + index);
     }
     else{
@@ -65,7 +77,7 @@ public class MyLinkedList {
   }
 
   public String set(int index, String value) {
-    if(index < 0 || index > size) {
+    if(index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("index cannot be " + index);
     }
     else {

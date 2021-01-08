@@ -47,6 +47,7 @@ public class MyLinkedList {
       }
       current.setPrev(added);
       added.setNext(current);
+      size++;
     }
   }
 
@@ -73,6 +74,15 @@ public class MyLinkedList {
       old.setData(value);
       return oldvalue;
     }
+  }
+
+  public String toString() {
+    String result = "";
+    for(int i = 0; i < size; i++) {
+      Node current = atIndex(i);
+      result = result + current.getData() + "\n";
+    }
+    return result;
   }
 
   private Node atIndex(int index) {

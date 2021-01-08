@@ -75,7 +75,7 @@ public class MyLinkedList {
     }
   }
 
-  public Node atIndex(int index) {
+  private Node atIndex(int index) {
     Node current = start;
     for(int i = 0; i < index; i++) {
       current = current.getNext();

@@ -1,0 +1,66 @@
+import java.util.*;
+public class MyLinkedList {
+  private int size;
+  private Node start, end;
+
+  public MyLinkedList(){
+    size = 0;
+  }
+
+  public int size() {
+    return size;
+  }
+
+  public boolean add(String value) {
+    if(size == 0) {
+      size++;
+      Node created = new Node(value);
+      start = created;
+      end = created;
+      return true;
+    }
+    else {
+      size++;
+      Node created = new Node(value);
+      end.setNext(created);
+      created.setPrev(end);
+      end = created;
+      return true;
+    }
+  }
+
+  public void add(int index, String value) {
+    Node current = start;
+    Node added = new Node(value);
+    if(index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("index cannot be " + index);
+    }
+    else{
+      for(int i = 0; i < index-1; i++) {
+        current = current.getNext();
+      }
+      current.setNext(added);
+      added.setPrev(current);
+      current = end;
+      for(int i = size - 1; i > index+1; i--) {
+        current = end.getPrev();
+      }
+      current.setPrev(added);
+      added.setNext(current);
+    }
+  }
+
+  public String get(int index) {
+    Node current = start;
+    if(index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("index cannot be " + index);
+    }
+    else{
+      for(int i = 0; i < index; i++) {
+        current = current.getNext();
+      }
+      return current.getData();
+    }
+  }
+
+}

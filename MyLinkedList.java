@@ -63,4 +63,24 @@ public class MyLinkedList {
     }
   }
 
+  public String set(int index, String value) {
+    if(index < 0 || index > size) {
+      throw new IndexOutOfBoundsException("index cannot be " + index);
+    }
+    else {
+      Node old = atIndex(index);
+      String oldvalue = old.getData();
+      old.setData(value);
+      return oldvalue;
+    }
+  }
+
+  public Node atIndex(int index) {
+    Node current = start;
+    for(int i = 0; i < index; i++) {
+      current = current.getNext();
+    }
+    return current;
+  }
+
 }

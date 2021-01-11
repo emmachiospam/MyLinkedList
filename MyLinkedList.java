@@ -98,6 +98,17 @@ public class MyLinkedList {
     return result;
   }
 
+  public String toStringReversed() {
+    String result = "[";
+    for(int i = size-1; i > 0; i--) {
+      Node current = atIndex(i);
+      result = result + current.getData() + ", ";
+    }
+    Node current = atIndex(0);
+    result = result + current.getData() + "]";
+    return result;
+  }
+
   private Node atIndex(int index) {
     Node current = start;
     for(int i = 0; i < index; i++) {

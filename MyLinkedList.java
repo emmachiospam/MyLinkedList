@@ -87,25 +87,70 @@ public class MyLinkedList {
     }
   }
 
+  public String remove(int index) {
+    Node removed = atIndex(index);
+    if(size == 1) {
+      size = 0;
+    }
+    else if(index == 0) {
+      start = start.getNext();
+      size--;
+    }
+    else if(index == size - 1) {
+      end = end.getPrev();
+      size--;
+    }
+    else {
+      Node curbefore = atIndex(index - 1);
+      Node curafter = atIndex(index + 1);
+      curbefore.setNext(curafter);
+      curafter.setPrev(curbefore);
+      size--;
+    }
+    return removed.getData();
+  }
+
+  public void extend(MyLinkedList other) {
+    Node first = other.atIndex(0);
+    Node last = atIndex(size-1);
+    last.setNext(first);
+    first.setPrev(last);
+    end = other.atIndex(other.size() - 1);
+    size = size + other.size();
+    other.size = 0;
+    other.end = null;
+    other.start = null;
+  }
+
   public String toString() {
     String result = "[";
-    for(int i = 0; i < size-1; i++) {
-      Node current = atIndex(i);
-      result = result + current.getData() + ", ";
+    if(size == 0) {
+      result = result + "]";
     }
-    Node current = atIndex(size - 1);
-    result = result + current.getData() + "]";
+    else {
+      for(int i = 0; i < size-1; i++) {
+        Node current = atIndex(i);
+        result = result + current.getData() + ", ";
+      }
+      Node current = atIndex(size - 1);
+      result = result + current.getData() + "]";
+    }
     return result;
   }
 
   public String toStringReversed() {
     String result = "[";
-    for(int i = size-1; i > 0; i--) {
-      Node current = atIndex(i);
-      result = result + current.getData() + ", ";
+    if(size == 0) {
+      result = result + "]";
     }
-    Node current = atIndex(0);
-    result = result + current.getData() + "]";
+    else {
+      for(int i = size-1; i > 0; i--) {
+        Node current = atIndex(i);
+        result = result + current.getData() + ", ";
+      }
+      Node current = atIndex(0);
+      result = result + current.getData() + "]";
+    }
     return result;
   }
 
